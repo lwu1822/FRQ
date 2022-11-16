@@ -78,11 +78,22 @@ public class APCalendar {
 
         int numDay = 0; 
 
-        int[] numDaysInAMonth = {};
+        int[] numDaysInAMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
+        if (leapYear && month > 2) {
+            for (int i = 0; i < month - 1; i++) {
+                numDay += numDaysInAMonth[i];
+            }
+            numDay += 1;
+        } else {
+            for (int i = 0; i < month - 1; i++) {
+                numDay += numDaysInAMonth[i];
+            }
+        }
+        
+        numDay += day; 
 
-
-        return 1;
+        return numDay;
         }
 
     /** Returns the number of leap years between year1 and year2, inclusive.
@@ -106,7 +117,7 @@ public class APCalendar {
     public static void main(String[] args) {
         // Private access modifiers
         System.out.println("firstDayOfYear: " + APCalendar.firstDayOfYear(1937));
-        System.out.println("dayOfYear: " + APCalendar.dayOfYear(1, 1, 2022));
+        System.out.println("dayOfYear: " + APCalendar.dayOfYear(3, 29, 2020));
 
         // Public access modifiers
         System.out.println("isLeapYear: " + APCalendar.isLeapYear(2022));
