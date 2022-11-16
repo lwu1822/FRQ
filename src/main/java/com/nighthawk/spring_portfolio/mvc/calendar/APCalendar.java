@@ -67,7 +67,7 @@ public class APCalendar {
         numDay += day; 
 
         return numDay;
-        }
+    }
 
     /** Returns the number of leap years between year1 and year2, inclusive.
      * Precondition: 0 <= year1 <= year2
