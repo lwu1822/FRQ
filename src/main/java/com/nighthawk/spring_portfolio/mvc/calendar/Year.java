@@ -10,6 +10,7 @@ class Year {
    private boolean isLeapYear;
    private int firstDay; 
    private int numDay; 
+   private int numLeapYear;
 
    // zero argument constructor
    public Year() {} 
@@ -28,6 +29,10 @@ class Year {
    public void setYear(int month, int day, int year) {
       this.year = year;
       this.setDayOfYear(month, day, year);
+   }
+
+   public void setYear(int year1, int year2) {
+      this.setNumberOfLeapYears(year1, year2);
    }
 
    /* isLeapYear getter/setters */
@@ -54,6 +59,14 @@ class Year {
       this.numDay = APCalendar.dayOfYear(month, day, year);
    }
 
+   /* getNumberOfLeapYears getter/setters */
+   public int getNumberOfLeapYears(int year1, int year2) {
+      return APCalendar.numberOfLeapYears(year1, year2);
+   }
+   private void setNumberOfLeapYears(int year1, int year2) {  
+      this.numLeapYear = APCalendar.numberOfLeapYears(year1, year2);
+   }
+
    
 
    /* isLeapYearToString formatted to be mapped to JSON */
@@ -69,6 +82,11 @@ class Year {
    /* dayOfYearToString formatted to be mapped to JSON */
    public String dayOfYearToString(){
       return ( "{ \"year\": "  +this.year+  ", " + "\"dayOfYear\": "  +this.numDay+ " }" );
+   }
+
+   /* numberOfLeapYears formatted to be mapped to JSON */
+   public String numberOfLeapYearsToString(){
+      return ( "{ \"numberOfLeapYears\": "  +this.numLeapYear+ " }" );
    }
 
    /* standard toString placeholder until class is extended */
