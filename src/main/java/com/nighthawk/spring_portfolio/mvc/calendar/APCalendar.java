@@ -32,6 +32,11 @@ public class APCalendar {
     */
     private static int firstDayOfYear(int year) {
         // implementation not shown
+        int firstDay = dayOfWeek(1, 1, year);
+        return firstDay; 
+
+
+        /* 
         int lastTwoDigit = year % 100; 
         // before add 0 for 1900, 6 for 2000, etc. 
         int beforeYear = (lastTwoDigit/4) + 2;
@@ -62,6 +67,7 @@ public class APCalendar {
         }
         
         return firstDayOfYear;
+        */ 
     }
 
 
@@ -110,20 +116,55 @@ public class APCalendar {
             year1++;
         }
         return numLeapYear;
-        }
+    }
 
     /** Returns the value representing the day of the week for the given date
      * Precondition: The date represented by month, day, year is a valid date.
     */
     public static int dayOfWeek(int month, int day, int year) { 
         // to be implemented in part (b)
-        return 0;
+        int[] monthValue = {1, 4, 4, 0, 2, 5, 0, 3, 6, 1, 4, 6};
+
+        int lastTwoDigit = year % 100; 
+        // before add 0 for 1900, 6 for 2000, etc. 
+        int beforeYear = (lastTwoDigit/4) + day + monthValue[month-1];
+        if ((isLeapYear(year) && (month == 1)) || (isLeapYear(year) && (month == 2))) {
+            beforeYear -= 1; 
         }
+        // after add 0 for 1900, 6 for 2000, etc. 
+        int afterYear = beforeYear; 
+
+        int firstDigit = (year/100);
+
+        int firstDayOfYear = 0;
+
+
+        // add 0 for 1900, 6 for 2000, etc. 
+        if (firstDigit == 20){
+            afterYear += 6;
+        } else if (firstDigit == 19) {
+            afterYear = beforeYear; 
+        } else if (firstDigit == 17) {
+            afterYear += 4; 
+        } else if (firstDigit == 18) {
+            afterYear += 2; 
+        } else {
+            afterYear += 400; 
+        }
+
+        firstDayOfYear = (afterYear + lastTwoDigit)%7 - 1;
+        if (firstDayOfYear == -1) {
+            firstDayOfYear = 7; 
+        }
+        
+        return firstDayOfYear;
+
+    }
 
     /** Tester method */
     public static void main(String[] args) {
         // Private access modifiers
-        System.out.println("firstDayOfYear: " + APCalendar.firstDayOfYear(1937));
+        System.out.println("firstDayOfYear: " + APCalendar.firstDayOfYear(2022));
         System.out.println("dayOfYear: " + APCalendar.dayOfYear(3, 29, 2020));
 
         // Public access modifiers
