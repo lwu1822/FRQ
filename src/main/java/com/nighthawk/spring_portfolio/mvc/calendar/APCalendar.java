@@ -35,39 +35,6 @@ public class APCalendar {
         int firstDay = dayOfWeek(1, 1, year);
         return firstDay; 
 
-
-        /* 
-        int lastTwoDigit = year % 100; 
-        // before add 0 for 1900, 6 for 2000, etc. 
-        int beforeYear = (lastTwoDigit/4) + 2;
-        // after add 0 for 1900, 6 for 2000, etc. 
-        int afterYear = 0; 
-
-        int firstDigit = (year/100);
-
-        int firstDayOfYear = 0;
-
-
-        // add 0 for 1900, 6 for 2000, etc. 
-        if (firstDigit == 20){
-            afterYear += 6;
-        } else if (firstDigit == 19) {
-            afterYear = beforeYear; 
-        } else if (firstDigit == 17) {
-            afterYear += 4; 
-        } else if (firstDigit == 18) {
-            afterYear += 2; 
-        } else {
-            afterYear += 400; 
-        }
-
-        firstDayOfYear = (afterYear + lastTwoDigit)%7 - 1;
-        if (firstDayOfYear == 0) {
-            firstDayOfYear = 7; 
-        }
-        
-        return firstDayOfYear;
-        */ 
     }
 
 
