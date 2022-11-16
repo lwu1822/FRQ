@@ -57,6 +57,6 @@ class Year {
    public static void main(String[] args) {
       Year year = new Year();
       year.setYear(2022);
-      System.out.println(year);
+      System.out.println(year); // IMPORTANT: this calls the toString() method (woah)
    }
 }
