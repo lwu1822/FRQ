@@ -37,6 +37,24 @@ public class APCalendar {
 
     }
 
+    public static int numDaysToDeadline(int month1, int day1, int year1, int month2, int day2, int year2) {
+        int numDays1 = 0; 
+        int numDays2 = 0;
+        int numDaysDeadline = 0;
+        int yearDifference = 0;
+        numDays1 = dayOfYear(month1, day1, year1);
+        numDays2 = dayOfYear(month2, day2, year2);
+        if (year1 == year2) {
+            numDaysDeadline = numDays2 - numDays1;
+        }
+
+        if (year2 > year1) {
+            yearDifference = year2 - year1; 
+            numDaysDeadline = 365 - numDays1 + numDays2 + (365*(yearDifference - 1));
+        }
+        return numDaysDeadline; 
+    }
+
 
     /** Returns n, where month, day, and year specify the nth day of the year.
      * This method accounts for whether year is a leap year. 

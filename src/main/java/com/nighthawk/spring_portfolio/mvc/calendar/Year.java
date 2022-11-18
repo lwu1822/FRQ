@@ -7,6 +7,15 @@ package com.nighthawk.spring_portfolio.mvc.calendar;
  */
 class Year {
    private int year;
+   private int month;
+   private int day; 
+   private int year1;
+   private int year2;
+   private int month1; 
+   private int month2;
+   private int day1;
+   private int day2;
+   private int numDaysToDeadline; 
    private boolean isLeapYear;
    private int firstDay; 
    private int numDay; 
@@ -29,6 +38,8 @@ class Year {
 
    public void setYear(int month, int day, int year) {
       this.year = year;
+      this.month = month; 
+      this.day = day; 
       this.setDayOfYear(month, day, year);
       this.setDayOfWeek(month, day, year);
 
@@ -36,6 +47,23 @@ class Year {
 
    public void setYear(int year1, int year2) {
       this.setNumberOfLeapYears(year1, year2);
+   }
+
+   public void setYear(int month1, int day1, int year1, int month2, int day2, int year2) {
+      this.month1 = month1;
+      this.day1 = day1; 
+      this.year1 = year1; 
+      this.month2 = month2; 
+      this.day2 = day2; 
+      this.year2 = year2; 
+      this.setNumDaysToDeadline(month1, day1, year1, month2, day2, year2);
+   }
+
+   public int getNumDaysToDeadline(int month1, int day1, int year1, int month2, int day2, int year2) {
+      return APCalendar.numDaysToDeadline(month1, day1, year1, month2, day2, year2); 
+   }
+   public void setNumDaysToDeadline(int month1, int day1, int year1, int month2, int day2, int year2) {
+      this.numDaysToDeadline = APCalendar.numDaysToDeadline(month1, day1, year1, month2, day2, year2);
    }
 
    /* isLeapYear getter/setters */
@@ -67,6 +95,8 @@ class Year {
       return APCalendar.numberOfLeapYears(year1, year2);
    }
    private void setNumberOfLeapYears(int year1, int year2) {  
+      this.year1 = year1;
+      this.year2 = year2;
       this.numLeapYear = APCalendar.numberOfLeapYears(year1, year2);
    }
 
@@ -92,16 +122,22 @@ class Year {
 
    /* dayOfYearToString formatted to be mapped to JSON */
    public String dayOfYearToString(){
-      return ( "{ \"year\": "  +this.year+  ", " + "\"dayOfYear\": "  +this.numDay+ " }" );
+      return ( "{ \"month\": " +this.month+ ", " + "\"day\": " +this.day+ ", " + "\"year\": "  +this.year+  ", " + "\"dayOfYear\": "  +this.numDay+ " }" );
    }
 
    /* numberOfLeapYears formatted to be mapped to JSON */
    public String numberOfLeapYearsToString(){
-      return ( "{ \"numberOfLeapYears\": "  +this.numLeapYear+ " }" );
+      return ( "{ \"year1\": "  +this.year1+ ", " + "\"year2\": "  +this.year2+ ", " +"\"numberOfLeapYears\": "  +this.numLeapYear+ " }" );
+
+      // return ( "{ \"year1\": " + this.year1+ "\"year2\": " + this.year2 + "\"numberOfLeapYears\": "  +this.numLeapYear+ " }" );
    }
 
    public String dayOfWeekToString(){
-      return ( "{ \"year\": "  +this.year+  ", " + "\"dayOfWeek\": "  +this.firstDayOfYear+ " }" );
+      return ( "{ \"month\": " +this.month+ ", " + "\"day\": " +this.day+ ", " + "\"year\": "  +this.year+  ", " + "\"dayOfWeek\": "  +this.firstDayOfYear+ " }" );
+   }
+
+   public String numDaysToDeadlineToString(){
+      return ( "{ \"month1\": " +this.month1+ ", " + "\"day1\": " +this.day1+ ", " + "\"year1\": "  +this.year1+  ", " + "\"month2\": " +this.month2+ ", " + "\"day2\": " +this.day2+ ", " + "\"year2\": "  +this.year2+  ", "+ "\"numDaysToDeadline\": "  +this.numDaysToDeadline+ " }" );
    }
 
    /* standard toString placeholder until class is extended */
