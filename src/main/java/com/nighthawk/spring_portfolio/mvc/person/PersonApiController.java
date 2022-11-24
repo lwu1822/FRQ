@@ -24,6 +24,8 @@ public class PersonApiController {
     /*
     GET List of People
      */
+
+    // IMPORTANT: ResponseEntity: conf HTTP response (status code, header, body)
     @GetMapping("/")
     public ResponseEntity<List<Person>> getPeople() {
         return new ResponseEntity<>( repository.findAllByOrderByNameAsc(), HttpStatus.OK);

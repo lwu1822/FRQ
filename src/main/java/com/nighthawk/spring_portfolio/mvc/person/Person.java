@@ -89,7 +89,10 @@ public class Person {
     // A custom getter to return age from dob attribute
     public int getAge() {
         if (this.dob != null) {
+            // IMPORTANT: convert dob to current zone, then remove all the junk, leave behind 
+            // YYYY-MM-DD
             LocalDate birthDay = this.dob.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            // Calculate num year, month, day, btw dob + today -> sh # years
             return Period.between(birthDay, LocalDate.now()).getYears(); }
         return -1;
     }
