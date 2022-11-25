@@ -74,6 +74,8 @@ public class PersonApiController {
         Date dob;
         // IMPORTANT: convert dobString f string to Date
         // try catch: if code in try statement mk error, x catch statement
+        // c only do SimpleDataFormat in try catch statement!! 
+        // https://alvinalexander.com/java/simpledateformat-convert-string-to-date-formatted-parse/
         try {
             dob = new SimpleDateFormat("MM-dd-yyyy").parse(dobString);
         } catch (Exception e) {
@@ -132,6 +134,7 @@ public class PersonApiController {
             Map<String, Map<String, Object>> date_map = new HashMap<>();
             date_map.put( (String) stat_map.get("date"), attributeMap );
             // IMPORTANT: setStats works b/c of lombok (see stats hashmap in Person.java) (i think)
+            // c confirm by type get/set in Person.java!!!
             person.setStats(date_map);  // BUG, needs to be customized to replace if existing or append if new
             repository.save(person);  // conclude by writing the stats updates
 

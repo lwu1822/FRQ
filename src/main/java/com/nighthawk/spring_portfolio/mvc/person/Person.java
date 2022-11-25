@@ -27,6 +27,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
+
 /*
 Person is a POJO, Plain Old Java Object.
 First set of annotations add functionality to POJO
@@ -95,6 +99,33 @@ public class Person {
             // Calculate num year, month, day, btw dob + today -> sh # years
             return Period.between(birthDay, LocalDate.now()).getYears(); }
         return -1;
+    }
+
+    public static void main(String[] args) {
+
+        // IMPORTANT: If only do Date dob;, will h error: the local variable (var) may not have been initialized
+        //  https://stackoverflow.com/questions/2448843/variable-might-not-have-been-initialized-error
+        Date dob = null; 
+    
+        try {
+            dob = new SimpleDateFormat("MM-dd-yyyy").parse("10-21-1900");
+        } catch (Exception e) {
+            System.out.println("error"); 
+        }
+
+        Person person = new Person("tedison@gmail.com", "123qwerty!", "Thomas Edison", dob); 
+
+        System.out.println("Email: " + person.getEmail()); 
+        System.out.println("Password: " + person.getPassword()); 
+        System.out.println("Name: " + person.getName()); 
+        System.out.println("dob: " + person.getDob()); 
+        System.out.println("Age: " + person.getAge()); 
+
+
+
+
+
+
     }
 
 }
