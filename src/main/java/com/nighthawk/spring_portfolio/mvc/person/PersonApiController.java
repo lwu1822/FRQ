@@ -131,7 +131,9 @@ public class PersonApiController {
                     attributeMap.put(entry.getKey(), entry.getValue());
             }
 
-            Map<String, String> returnedMap = new HashMap<>(); 
+            //************************************************************************ 
+
+            Map<String, Map<String, Object>> returnedMap = new HashMap<>(); 
             returnedMap = person.toStringNotDefault(); 
             System.out.println("returnMap:  " + returnedMap);
 
@@ -151,19 +153,23 @@ public class PersonApiController {
 
             
             //******************************************************************************
-            Map<String, String> returnedMap3 = new LinkedHashMap<>();
-            for(Entry<String, String> entry: returnedMap.entrySet()) {
+             
+            Map<String, Map<String, Object>> returnedMap3 = new LinkedHashMap<>();
+            for(Entry<String, Map<String, Object>> entry: returnedMap.entrySet()) {
                 returnedMap3.put(entry.getKey(), entry.getValue()); 
             }
+            
             System.out.println("returnmap 3" + returnedMap3);
-
+ /* 
             for(Entry<String, String> entry: returnedMap2.entrySet()) {
                 returnedMap3.put("placeholder", entry.getValue()); 
             }
+            */ 
+            
             
             System.out.println("returnMap3 test " + returnedMap3); 
             person.setStatsTwo(returnedMap3); 
-              
+             
             
             
 

@@ -133,7 +133,7 @@ public class Person {
     */ 
 
     
-    public Map<String, String>  toStringNotDefault() { 
+    public Map<String, Map<String, Object>>  toStringNotDefault() { 
         return this.statsTwo;
      }
 
@@ -144,9 +144,9 @@ public class Person {
 
     @Type(type="json")
     @Column(columnDefinition = "jsonb")
-    Map<String, String> statsTwo = new HashMap<>();
+    Map<String, Map<String, Object>> statsTwo = new HashMap<>();
 
-     public void setStatsTwo(Map<String,String> statsTwo) {  
+     public void setStatsTwo(Map<String, Map<String, Object>> statsTwo) {  
 
         this.statsTwo = statsTwo; 
     }
