@@ -208,4 +208,30 @@ public class PersonApiController {
         
     } 
 
+    @DeleteMapping("/deleteAllStats/{id}")
+    public ResponseEntity<Person> deletePersonAllStats(@PathVariable long id) {
+        Optional<Person> optional = repository.findById(id);
+        if (optional.isPresent()) {  // Good ID
+            Person person = optional.get();  // value from findByID
+
+            Map<String, Map<String, Object>> returnedMap3 = new LinkedHashMap<>();
+           
+            person.setStatsTwo(returnedMap3);
+            
+            System.out.println(returnedMap3); 
+            System.out.println("Person:  " + person); 
+
+            System.out.println("*************");
+
+            repository.save(person);
+
+
+            return new ResponseEntity<>(person, HttpStatus.OK);  // OK HTTP response: status code, headers, and body
+
+        }
+        // Bad ID
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
+    }
+
+
 }
