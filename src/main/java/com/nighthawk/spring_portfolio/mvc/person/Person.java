@@ -153,7 +153,7 @@ public class Person {
     
 
     public static void main(String[] args) {
- /* 
+  
         // IMPORTANT: If only do Date dob;, will h error: the local variable (var) may not have been initialized
         //  https://stackoverflow.com/questions/2448843/variable-might-not-have-been-initialized-error
         Date dob = null; 
@@ -173,7 +173,7 @@ public class Person {
         System.out.println("dob: " + person.getDob()); 
         System.out.println("Age: " + person.getAge());
         
-         
+         /* 
         Map<String, Object> subMap = new HashMap<>(); 
         subMap.put("calories", 2200); 
         subMap.put("steps", 8000); 

@@ -233,5 +233,51 @@ public class PersonApiController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
     }
 
+    @DeleteMapping("/deleteSingleStats/{id}/{date}")
+    public ResponseEntity<Person> deletePersonSingleStats(@PathVariable long id, @PathVariable String date) {
+        Optional<Person> optional = repository.findById(id);
+        if (optional.isPresent()) {  // Good ID
+            Person person = optional.get();  // value from findByID
+
+            Map<String, Map<String, Object>> returnedMap3 = new LinkedHashMap<>();
+
+            returnedMap3 = person.getStatsTwo();
+            System.out.println(person.getStatsTwo()); 
+
+            for(Entry<String, Map<String, Object>> entry: returnedMap3.entrySet()) {
+                System.out.println(entry.getKey() + "  " + entry.getValue()); 
+                if (entry.getKey().equals(date)) {
+                    System.out.println("matched"); 
+                    System.out.println("no rm returnMap3 " + returnedMap3); 
+                    returnedMap3.remove(date); 
+                    System.out.println("removed returnMap3:  " + returnedMap3); 
+                }
+            }
+
+            person.setStatsTwo(returnedMap3); 
+
+            repository.save(person);
+
+
+            /* 
+            Map<String, Map<String, Object>> returnedMap3 = new LinkedHashMap<>();
+           
+            person.setStatsTwo(returnedMap3);
+            
+            System.out.println(returnedMap3); 
+            System.out.println("Person:  " + person); 
+
+            System.out.println("*************");
+
+            repository.save(person);
+
+            */ 
+            return new ResponseEntity<>(person, HttpStatus.OK);  // OK HTTP response: status code, headers, and body
+
+        }
+        // Bad ID
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
+    }
+
 
 }
