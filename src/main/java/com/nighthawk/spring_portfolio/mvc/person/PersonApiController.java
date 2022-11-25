@@ -110,6 +110,8 @@ public class PersonApiController {
     /*
     The personStats API adds stats by Date to Person table 
     */
+
+     
     @PostMapping(value = "/setStats", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Person> personStats(@RequestBody final Map<String,Object> stat_map) {
         // find ID
@@ -159,17 +161,27 @@ public class PersonApiController {
                 returnedMap3.put(entry.getKey(), entry.getValue()); 
             }
             
-            System.out.println("returnmap 3" + returnedMap3);
- /* 
+            System.out.println("returnmap 3.1 " + returnedMap3);
+
+            for(Entry<String, Map<String, Object>> entry: returnedMap2.entrySet()) {
+                returnedMap3.put(entry.getKey(), entry.getValue()); 
+            }
+
+            System.out.println("returnmap 3.2 " + returnedMap3);
+
+
+            
+
+            /* 
             for(Entry<String, String> entry: returnedMap2.entrySet()) {
                 returnedMap3.put("placeholder", entry.getValue()); 
             }
-            */ 
+             */
             
-            
+            /* 
             System.out.println("returnMap3 test " + returnedMap3); 
             person.setStatsTwo(returnedMap3); 
-             
+             */
             
             
 
@@ -180,10 +192,11 @@ public class PersonApiController {
             //person.setThirdMap(thirdMap); 
             person.setThirdMap(date_map); 
             */
+            
             System.out.println("Person " + person); 
             System.out.println("*************");
 
-            repository.save(person);  // conclude by writing the stats updates
+           // repository.save(person);  // conclude by writing the stats updates
 
             // return Person with update Stats
             return new ResponseEntity<>(person, HttpStatus.OK);
@@ -191,6 +204,6 @@ public class PersonApiController {
         // return Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
         
-    }
+    } 
 
 }
