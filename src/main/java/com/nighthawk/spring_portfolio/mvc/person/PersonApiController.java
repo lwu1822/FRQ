@@ -26,6 +26,7 @@ public class PersonApiController {
      */
 
     // IMPORTANT: ResponseEntity: conf HTTP response (status code, header, body)
+    // Method name c be anything!??
     @GetMapping("/")
     public ResponseEntity<List<Person>> getPeople() {
         return new ResponseEntity<>( repository.findAllByOrderByNameAsc(), HttpStatus.OK);
@@ -36,9 +37,11 @@ public class PersonApiController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<Person> getPerson(@PathVariable long id) {
+        // IMPORTANT: optional allow input null/no null value
         Optional<Person> optional = repository.findById(id);
         if (optional.isPresent()) {  // Good ID
             Person person = optional.get();  // value from findByID
+            // IMPORTANT: why use person, c't use optional?
             return new ResponseEntity<>(person, HttpStatus.OK);  // OK HTTP response: status code, headers, and body
         }
         // Bad ID
@@ -69,6 +72,8 @@ public class PersonApiController {
                                              @RequestParam("name") String name,
                                              @RequestParam("dob") String dobString) {
         Date dob;
+        // IMPORTANT: convert dobString f string to Date
+        // try catch: if code in try statement mk error, x catch statement
         try {
             dob = new SimpleDateFormat("MM-dd-yyyy").parse(dobString);
         } catch (Exception e) {
@@ -83,12 +88,16 @@ public class PersonApiController {
     /*
     The personSearch API looks across database for partial match to term (k,v) passed by RequestEntity body
      */
+    // IMPORTANT: allow return JSON
     @PostMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
+    // IMPORTANT: Map<String,String>: Mk map w/ key = str, value = str
     public ResponseEntity<Object> personSearch(@RequestBody final Map<String,String> map) {
         // extract term from RequestEntity
+        // IMPORTANT: refer to screenshot on tech talk, .get: Retrive value in map that h key = "term"
         String term = (String) map.get("term");
 
         // JPA query to filter on term
+        // IMPORTANT: search db for searched keyword in both name + email
         List<Person> list = repository.findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase(term, term);
 
         // return resulting list and status, error checking should be added
@@ -101,6 +110,7 @@ public class PersonApiController {
     @PostMapping(value = "/setStats", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Person> personStats(@RequestBody final Map<String,Object> stat_map) {
         // find ID
+        // IMPORTANT: change f string to long
         long id=Long.parseLong((String)stat_map.get("id"));  
         Optional<Person> optional = repository.findById((id));
         if (optional.isPresent()) {  // Good ID
@@ -108,8 +118,12 @@ public class PersonApiController {
 
             // Extract Attributes from JSON
             Map<String, Object> attributeMap = new HashMap<>();
+            // IMPORTANT: entrySet: Change map to set (set looks like: [], map looks like: {})
+            // Map.Entry: Combine key value pair together
             for (Map.Entry<String,Object> entry : stat_map.entrySet())  {
                 // Add all attribute other thaN "date" to the "attribute_map"
+                // IMPORTANT: getKey = take the key, rm value
+                // getValue = take the value, rm key
                 if (!entry.getKey().equals("date") && !entry.getKey().equals("id"))
                     attributeMap.put(entry.getKey(), entry.getValue());
             }
@@ -117,6 +131,7 @@ public class PersonApiController {
             // Set Date and Attributes to SQL HashMap
             Map<String, Map<String, Object>> date_map = new HashMap<>();
             date_map.put( (String) stat_map.get("date"), attributeMap );
+            // IMPORTANT: setStats works b/c of lombok (see stats hashmap in Person.java) (i think)
             person.setStats(date_map);  // BUG, needs to be customized to replace if existing or append if new
             repository.save(person);  // conclude by writing the stats updates
 
