@@ -169,6 +169,8 @@ public class PersonApiController {
 
             System.out.println("returnmap 3.2 " + returnedMap3);
 
+            person.setStatsTwo(returnedMap3);
+
 
             
 
@@ -193,10 +195,10 @@ public class PersonApiController {
             person.setThirdMap(date_map); 
             */
             
-            System.out.println("Person " + person); 
+            System.out.println("Person    " + person); 
             System.out.println("*************");
 
-           // repository.save(person);  // conclude by writing the stats updates
+           repository.save(person);  // conclude by writing the stats updates
 
             // return Person with update Stats
             return new ResponseEntity<>(person, HttpStatus.OK);
