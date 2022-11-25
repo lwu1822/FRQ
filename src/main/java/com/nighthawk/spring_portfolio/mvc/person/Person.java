@@ -101,8 +101,59 @@ public class Person {
         return -1;
     }
 
-    public static void main(String[] args) {
+   
+    @Type(type="json")
+    @Column(columnDefinition = "jsonb")
+    static Map<Integer,Map<String,Map<String, Object>>> thirdMap = new HashMap<>();
 
+    public void setThirdMap(Map<String,Map<String, Object>> thirdMaps) {  
+
+        thirdMap.put(1, thirdMaps); 
+        System.out.println(thirdMap); 
+    }
+
+    /* 
+    public void setStats(Map<String,Map<String, Object>> stats) {  
+
+        this.stats = stats; 
+        thirdMap.put(counter, stats);
+        counter++; 
+        System.out.println(thirdMap); 
+    }
+    */
+    
+
+/* 
+    public String emailToString() {
+      return (  "" + this.statsTwo );
+
+        // return entire person object
+      //return ("Person(id=" + this.id + ", email="  + this.email + ", password=" + this.password + ", name=" + this.name + ", dob=" + this.dob + ", stats=" + this.stats + ", thirdMap=" + this.thirdMap + ")" );
+    }
+    */ 
+
+    
+    public Map<String, String>  toStringNotDefault() { 
+        return this.statsTwo;
+     }
+
+     public Map<String, Map<String, Object>> toStringNotDefaultNewStats() { 
+        return this.stats; 
+     }
+
+
+    @Type(type="json")
+    @Column(columnDefinition = "jsonb")
+    Map<String, String> statsTwo = new HashMap<>();
+
+     public void setStatsTwo(Map<String,String> statsTwo) {  
+
+        this.statsTwo = statsTwo; 
+    }
+    
+
+    public static void main(String[] args) {
+ /* 
         // IMPORTANT: If only do Date dob;, will h error: the local variable (var) may not have been initialized
         //  https://stackoverflow.com/questions/2448843/variable-might-not-have-been-initialized-error
         Date dob = null; 
@@ -115,11 +166,47 @@ public class Person {
 
         Person person = new Person("tedison@gmail.com", "123qwerty!", "Thomas Edison", dob); 
 
+
         System.out.println("Email: " + person.getEmail()); 
         System.out.println("Password: " + person.getPassword()); 
         System.out.println("Name: " + person.getName()); 
         System.out.println("dob: " + person.getDob()); 
-        System.out.println("Age: " + person.getAge()); 
+        System.out.println("Age: " + person.getAge());
+        
+         
+        Map<String, Object> subMap = new HashMap<>(); 
+        subMap.put("calories", 2200); 
+        subMap.put("steps", 8000); 
+
+        System.out.println(subMap); 
+
+        Map<String,Map<String, Object>> actualMap = new HashMap<>(); 
+        actualMap.put("2022-11-13", subMap);
+        person.setStats(actualMap);
+
+
+
+        Map<String, Object> subMap2 = new HashMap<>(); 
+        subMap2.put("calories", 1000); 
+        subMap2.put("steps", 5000); 
+
+        System.out.println(subMap2); 
+
+        Map<String,Map<String, Object>> actualMap2 = new HashMap<>(); 
+        actualMap2.put("2022-11-14", subMap2);
+
+
+        person.setStats(actualMap2);
+
+        System.out.println(person); 
+        */
+
+/* 
+       System.out.println("Stats: " + person.getStats()); 
+        Map<Integer,Map<String,Map<String, Object>>> thirdMap = new HashMap<>(); 
+        thirdMap.put(1, actualMap); 
+        System.out.println(thirdMap); 
+        */ 
 
 
 

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import java.text.SimpleDateFormat;
+import java.util.Map.Entry;
 
 @RestController
 @RequestMapping("/api/person")
@@ -130,12 +131,52 @@ public class PersonApiController {
                     attributeMap.put(entry.getKey(), entry.getValue());
             }
 
+            Map<String, String> returnedMap = new HashMap<>(); 
+            returnedMap = person.toStringNotDefault(); 
+            System.out.println("returnMap:  " + returnedMap);
+
+
             // Set Date and Attributes to SQL HashMap
             Map<String, Map<String, Object>> date_map = new HashMap<>();
             date_map.put( (String) stat_map.get("date"), attributeMap );
             // IMPORTANT: setStats works b/c of lombok (see stats hashmap in Person.java) (i think)
             // c confirm by type get/set in Person.java!!!
             person.setStats(date_map);  // BUG, needs to be customized to replace if existing or append if new
+
+             
+            Map<String, Map<String, Object>> returnedMap2 = new HashMap<>(); 
+            returnedMap2 = person.toStringNotDefaultNewStats(); 
+            //returnedMap2.put("stats", person.toStringNotDefaultNewStats());
+            System.out.println("returnMap2:  " + returnedMap2);
+
+            
+            //******************************************************************************
+            Map<String, String> returnedMap3 = new LinkedHashMap<>();
+            for(Entry<String, String> entry: returnedMap.entrySet()) {
+                returnedMap3.put(entry.getKey(), entry.getValue()); 
+            }
+            System.out.println("returnmap 3" + returnedMap3);
+
+            for(Entry<String, String> entry: returnedMap2.entrySet()) {
+                returnedMap3.put("placeholder", entry.getValue()); 
+            }
+            
+            System.out.println("returnMap3 test " + returnedMap3); 
+            person.setStatsTwo(returnedMap3); 
+              
+            
+            
+
+
+            /* 
+            Map<Integer,Map<String,Map<String, Object>>> thirdMap = new HashMap<>();
+            thirdMap.put(1, date_map); 
+            //person.setThirdMap(thirdMap); 
+            person.setThirdMap(date_map); 
+            */
+            System.out.println("Person " + person); 
+            System.out.println("*************");
+
             repository.save(person);  // conclude by writing the stats updates
 
             // return Person with update Stats
