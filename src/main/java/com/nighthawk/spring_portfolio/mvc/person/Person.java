@@ -5,6 +5,7 @@ import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.persistence.Column;
@@ -29,6 +30,9 @@ import lombok.NonNull;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+
+import java.util.Map.Entry;
+
 
 
 /*
@@ -100,27 +104,6 @@ public class Person {
             return Period.between(birthDay, LocalDate.now()).getYears(); }
         return -1;
     }
-
-   
-    @Type(type="json")
-    @Column(columnDefinition = "jsonb")
-    static Map<Integer,Map<String,Map<String, Object>>> thirdMap = new HashMap<>();
-
-    public void setThirdMap(Map<String,Map<String, Object>> thirdMaps) {  
-
-        thirdMap.put(1, thirdMaps); 
-        System.out.println(thirdMap); 
-    }
-
-    /* 
-    public void setStats(Map<String,Map<String, Object>> stats) {  
-
-        this.stats = stats; 
-        thirdMap.put(counter, stats);
-        counter++; 
-        System.out.println(thirdMap); 
-    }
-    */
     
 
 /* 
@@ -133,7 +116,7 @@ public class Person {
     */ 
 
     
-    public Map<String, Map<String, Object>>  toStringNotDefault() { 
+    public Map<String, Map<String, Object>> toStringNotDefault() { 
         return this.statsTwo;
      }
 
@@ -145,12 +128,17 @@ public class Person {
     @Type(type="json")
     @Column(columnDefinition = "jsonb")
     Map<String, Map<String, Object>> statsTwo = new HashMap<>();
-
+ 
      public void setStatsTwo(Map<String, Map<String, Object>> statsTwo) {  
 
         this.statsTwo = statsTwo; 
-    }
+    } 
     
+
+    public String toString() {
+        return ("Person(id=" + this.id + ", email=" + this.email +", password=" + this.password + ", name=" + this.name + ", dob=" + this.dob + ", stats=" + this.stats + ", statsTwo=" + this.statsTwo + ")");
+    }
+
 
     public static void main(String[] args) {
   
@@ -172,6 +160,44 @@ public class Person {
         System.out.println("Name: " + person.getName()); 
         System.out.println("dob: " + person.getDob()); 
         System.out.println("Age: " + person.getAge());
+
+        // "original" stats
+        Map<String, Map<String, Object>> stat = new LinkedHashMap<>();
+        Map<String,Object> statsub = new LinkedHashMap<>(); 
+        statsub.put("steps", (Integer)10000); 
+        statsub.put("calories", (Integer)2000); 
+        statsub.put("sleep", (Integer)8); 
+
+        stat.put("11-20-2022", statsub); 
+
+        Map<String,Map<String, Object>> stat2 = new HashMap<>();
+        Map<String,Object> statsub2 = new LinkedHashMap<>(); 
+        statsub2.put("steps", (Integer)8000); 
+        statsub2.put("calories", (Integer)2000); 
+        statsub2.put("sleep", (Integer)9); 
+        stat2.put("11-21-2022", statsub2);
+
+        //System.out.println(stat); 
+        //System.out.println(stat2); 
+
+       
+        person.setStats(stat);
+
+        Map<String,Map<String, Object>> stat3 = new LinkedHashMap<>();
+        for(Entry<String, Map<String, Object>> entry: stat.entrySet()) {
+            stat3.put(entry.getKey(), entry.getValue()); 
+        }
+        for(Entry<String, Map<String, Object>> entry: stat2.entrySet()) {
+            stat3.put(entry.getKey(), entry.getValue()); 
+        }
+
+        person.setStatsTwo(stat3); 
+        //System.out.println(stat3); 
+
+        System.out.println("toString: " + person.toString()); 
+    
+
+        
         
          /* 
         Map<String, Object> subMap = new HashMap<>(); 

@@ -171,29 +171,6 @@ public class PersonApiController {
 
             person.setStatsTwo(returnedMap3);
 
-
-            
-
-            /* 
-            for(Entry<String, String> entry: returnedMap2.entrySet()) {
-                returnedMap3.put("placeholder", entry.getValue()); 
-            }
-             */
-            
-            /* 
-            System.out.println("returnMap3 test " + returnedMap3); 
-            person.setStatsTwo(returnedMap3); 
-             */
-            
-            
-
-
-            /* 
-            Map<Integer,Map<String,Map<String, Object>>> thirdMap = new HashMap<>();
-            thirdMap.put(1, date_map); 
-            //person.setThirdMap(thirdMap); 
-            person.setThirdMap(date_map); 
-            */
             
             System.out.println("Person    " + person); 
             System.out.println("*************");
@@ -243,7 +220,7 @@ public class PersonApiController {
 
             returnedMap3 = person.getStatsTwo();
             System.out.println(person.getStatsTwo()); 
-
+ 
             for(Entry<String, Map<String, Object>> entry: returnedMap3.entrySet()) {
                 System.out.println(entry.getKey() + "  " + entry.getValue()); 
                 if (entry.getKey().equals(date)) {
@@ -254,24 +231,10 @@ public class PersonApiController {
                 }
             }
 
-            person.setStatsTwo(returnedMap3); 
+           // person.setStatsTwo(returnedMap3); 
 
-            repository.save(person);
+            //repository.save(person); */
 
-
-            /* 
-            Map<String, Map<String, Object>> returnedMap3 = new LinkedHashMap<>();
-           
-            person.setStatsTwo(returnedMap3);
-            
-            System.out.println(returnedMap3); 
-            System.out.println("Person:  " + person); 
-
-            System.out.println("*************");
-
-            repository.save(person);
-
-            */ 
             return new ResponseEntity<>(person, HttpStatus.OK);  // OK HTTP response: status code, headers, and body
 
         }
