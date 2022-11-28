@@ -260,5 +260,103 @@ public class PersonApiController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
     }
 
+    @PostMapping(value = "/setWorkout", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Person> personWorkout(@RequestBody final Map<String,Object> workout_map) {
+        // find ID
+        // IMPORTANT: change f string to long
+        long id=Long.parseLong((String)workout_map.get("id"));  
+        Optional<Person> optional = repository.findById((id));
+        if (optional.isPresent()) {  // Good ID
+            String date = ""; 
+
+            Person person = optional.get();  // value from findByID
+
+            // Extract Attributes from JSON
+            Map<String, Object> workoutList = new LinkedHashMap<>();
+            // IMPORTANT: entrySet: Change map to set (set looks like: [], map looks like: {})
+            // Map.Entry: Combine key value pair together
+            for (Map.Entry<String,Object> entry : workout_map.entrySet())  {
+                // Add all attribute other thaN "date" to the "attribute_map"
+                // IMPORTANT: getKey = take the key, rm value
+                // getValue = take the value, rm key
+                if (!entry.getKey().equals("date") && !entry.getKey().equals("id")) {
+                    workoutList.put(entry.getKey(), entry.getValue());
+                }
+                if (entry.getKey().equals("date")) {
+                    date = (String)entry.getValue(); 
+                }
+            }
+
+            //************************************************************************ 
+
+            Map<String, Map<String, Object>> workoutList2 = new LinkedHashMap<>(); 
+            workoutList2 = person.getWorkout(); 
+            System.out.println("workoutList2:  " + workoutList2);
+
+
+            try {
+                workoutList2.put(date, workoutList); 
+            } catch (Exception e) {
+                workoutList2 = new LinkedHashMap<>(); 
+                workoutList2.put(date, workoutList);  
+            }
+
+            System.out.println("workoutList: " + workoutList); 
+           // workoutList2.put(date, workoutList); 
+            System.out.println("workoutList2: " + workoutList2); 
+
+            person.setWorkout(workoutList2);
+
+            
+            System.out.println("Person    " + person); 
+            System.out.println("*************");
+
+           repository.save(person);
+
+/* 
+            // Set Date and Attributes to SQL HashMap
+            Map<String, Map<String, Object>> date_map = new HashMap<>();
+            date_map.put( (String) stat_map.get("date"), attributeMap );
+            // IMPORTANT: setStats works b/c of lombok (see stats hashmap in Person.java) (i think)
+            // c confirm by type get/set in Person.java!!!
+            person.setStats(date_map);  // BUG, needs to be customized to replace if existing or append if new
+
+             
+            Map<String, Map<String, Object>> returnedMap2 = new HashMap<>(); 
+            returnedMap2 = person.toStringNotDefaultNewStats(); 
+            //returnedMap2.put("stats", person.toStringNotDefaultNewStats());
+            System.out.println("returnMap2:  " + returnedMap2);
+
+            
+            //******************************************************************************
+             
+            Map<String, Map<String, Object>> returnedMap3 = new LinkedHashMap<>();
+            for(Entry<String, Map<String, Object>> entry: returnedMap.entrySet()) {
+                returnedMap3.put(entry.getKey(), entry.getValue()); 
+            }
+            
+            System.out.println("returnmap 3.1 " + returnedMap3);
+
+            for(Entry<String, Map<String, Object>> entry: returnedMap2.entrySet()) {
+                returnedMap3.put(entry.getKey(), entry.getValue()); 
+            }
+
+            System.out.println("returnmap 3.2 " + returnedMap3);
+
+            person.setStatsTwo(returnedMap3);
+
+            
+            System.out.println("Person    " + person); 
+            System.out.println("*************");
+
+           repository.save(person);  // conclude by writing the stats updates
+*/
+            // return Person with update Stats
+            return new ResponseEntity<>(person, HttpStatus.OK);
+        }
+        // return Bad ID
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
+        
+    } 
 
 }

@@ -133,10 +133,15 @@ public class Person {
 
         this.statsTwo = statsTwo; 
     } 
+
+    @Type(type="json")
+    @Column(columnDefinition = "jsonb")
+    Map<String, Map<String, Object>> workout = new HashMap<>();
+
     
 
     public String toString() {
-        return ("Person(id=" + this.id + ", email=" + this.email +", password=" + this.password + ", name=" + this.name + ", dob=" + this.dob + ", stats=" + this.stats + ", statsTwo=" + this.statsTwo + ")");
+        return ("Person(id=" + this.id + ", email=" + this.email +", password=" + this.password + ", name=" + this.name + ", dob=" + this.dob + ", stats=" + this.stats + ", statsTwo=" + this.statsTwo + ", workout=" + this.workout + ")");
     }
 
 
