@@ -221,19 +221,37 @@ public class PersonApiController {
             returnedMap3 = person.getStatsTwo();
             System.out.println(person.getStatsTwo()); 
  
+            System.out.println(returnedMap3.size()); 
+
+            String dateRemove = ""; 
+            /* 
+            returnedMap3.forEach((key, value) -> {
+                if(key.equals(date)) {
+                    dateRemove = date;  
+                }
+            });
+            */ 
+
+            
             for(Entry<String, Map<String, Object>> entry: returnedMap3.entrySet()) {
                 System.out.println(entry.getKey() + "  " + entry.getValue()); 
                 if (entry.getKey().equals(date)) {
                     System.out.println("matched"); 
                     System.out.println("no rm returnMap3 " + returnedMap3); 
-                    returnedMap3.remove(date); 
+                    dateRemove = date; 
+                    // IMPORTANT: c't rm inside this loop, will sh error
+                    // see https://stackoverflow.com/questions/29226989/java-util-concurrentmodificationexception-arises
+                    // returnedMap3.remove(date); 
                     System.out.println("removed returnMap3:  " + returnedMap3); 
                 }
             }
+            System.out.println(dateRemove); 
+            returnedMap3.remove(dateRemove); 
+            
 
-           // person.setStatsTwo(returnedMap3); 
+            person.setStatsTwo(returnedMap3); 
 
-            //repository.save(person); */
+            repository.save(person); 
 
             return new ResponseEntity<>(person, HttpStatus.OK);  // OK HTTP response: status code, headers, and body
 
