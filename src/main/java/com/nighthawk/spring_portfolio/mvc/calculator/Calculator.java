@@ -168,8 +168,9 @@ public class Calculator {
             if (tokenStack.peek().equals("(") || tokenStack.peek().equals(")")) {
                 this.error = true; 
                 tokenStack.pop(); 
+            } else {
+                reverse_polish.add(tokenStack.pop());
             }
-            reverse_polish.add(tokenStack.pop());
         }
 
     }
