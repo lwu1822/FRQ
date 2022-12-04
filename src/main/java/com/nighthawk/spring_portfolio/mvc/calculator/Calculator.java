@@ -114,6 +114,7 @@ public class Calculator {
 
         // stack is used to reorder for appropriate grouping and precedence
         Stack<String> tokenStack = new Stack<String>();
+        // IMPORTANT: you can access variables declared in class (ex: tokens)
         for (String token : tokens) {
             switch (token) {
                 // If left bracket push token on to stack
@@ -127,6 +128,7 @@ public class Calculator {
                     }
                     tokenStack.pop();
                     break;
+                // IMPORTANT: Many case together = run same code
                 case "+":
                 case "-":
                 case "*":
@@ -170,9 +172,58 @@ public class Calculator {
             if (isOperator(token))
             {
                 // Pop the two top entries
+                Double num2 = calcStack.pop(); 
+                Double num = calcStack.pop(); 
+
+
+                if (token.equals("+")) {
+                    result = num + num2;
+
+                }
+
+                if (token.equals("-")) {
+                    result = num - num2;
+
+                }
+
+
+                if (token.equals("*")) {
+                    result = num * num2;
+
+                }
+
+
+                if (token.equals("/")) {
+                    result = num / num2;
+
+                }
+
+
+                if (token.equals("%")) {
+                    result = num % num2;
+
+                }
+
+
+
+                // IMPORTANT: unsure why c't use switch case
+                /* 
+                switch (token) {
+                    case "+":
+                        result = num + num2; 
+                    case "-":
+                        result = num - num2; 
+                    case "*":
+                        result = num * num2; 
+                    case "/":
+                        result = num / num2; 
+                    case "%":
+                        result = num % num2; 
+                        
+                }
+                */
 
                 // Calculate intermediate results
-                result = 0.0;
 
                 // Push intermediate result back onto the stack
                 calcStack.push( result );
