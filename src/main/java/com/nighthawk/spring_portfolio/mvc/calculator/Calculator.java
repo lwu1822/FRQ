@@ -30,6 +30,7 @@ public class Calculator {
         OPERATORS.put("%", 3);
         OPERATORS.put("+", 4);
         OPERATORS.put("-", 4);
+        OPERATORS.put("^", 2);
     }
 
     // Helper definition for supported operators
@@ -145,6 +146,7 @@ public class Calculator {
                 case "*":
                 case "/":
                 case "%":
+                case "^":
                     // While stack
                     // not empty AND stack top element
                     // and is an operator
@@ -218,6 +220,10 @@ public class Calculator {
                 if (token.equals("%")) {
                     result = num % num2;
 
+                }
+
+                if (token.equals("^")) {
+                    result = Math.pow(num, num2); 
                 }
 
 
@@ -297,7 +303,7 @@ public class Calculator {
         System.out.println("Division Math\n" + divisionMath);
 
         System.out.println(); 
-        Calculator extraMath = new Calculator("(100 + 200) * 3)");
+        Calculator extraMath = new Calculator("2^0");
         System.out.println("Extra Math\n" + extraMath);
     }
 }
