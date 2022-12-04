@@ -276,6 +276,15 @@ public class Calculator {
         
     }
 
+    public String toStringJson() {
+        if (this.error) {
+            return ( "{ \"result\": "  + "Error" + " }" );
+        } else {
+            return ( "{ \"result\": "  +this.result + " }" );
+        }
+        
+    }
+
     // Tester method
     public static void main(String[] args) {
         // Random set of test cases
