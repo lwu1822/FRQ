@@ -19,6 +19,7 @@ public class Calculator {
     private ArrayList<String> tokens;
     private ArrayList<String> reverse_polish;
     private Double result = 0.0;
+    private boolean error = false; 
 
     // Helper definition for supported operators
     private final Map<String, Integer> OPERATORS = new HashMap<>();
@@ -122,11 +123,21 @@ public class Calculator {
                     tokenStack.push(token);
                     break;
                 case ")":
+                    while (tokenStack.empty() == false && !tokenStack.peek().equals("("))
+                        {
+                            reverse_polish.add( tokenStack.pop() );
+                        }
+                /* 
                     while (tokenStack.peek() != null && !tokenStack.peek().equals("("))
                     {
                         reverse_polish.add( tokenStack.pop() );
                     }
-                    tokenStack.pop();
+                */
+                    if (tokenStack.empty() == false) {
+                        tokenStack.pop();
+                    } else {
+                        tokenStack.push(token); 
+                    }
                     break;
                 // IMPORTANT: Many case together = run same code
                 case "+":
@@ -154,6 +165,10 @@ public class Calculator {
         }
         // Empty remaining tokens
         while (tokenStack.size() > 0) {
+            if (tokenStack.peek().equals("(") || tokenStack.peek().equals(")")) {
+                this.error = true; 
+                tokenStack.pop(); 
+            }
             reverse_polish.add(tokenStack.pop());
         }
 
@@ -240,10 +255,18 @@ public class Calculator {
 
     // Print the expression, terms, and result
     public String toString() {
-        return ("Original expression: " + this.expression + "\n" +
+        if (this.error) {
+            return ("Original expression: " + this.expression + "\n" +
+                "Tokenized expression: " + this.tokens.toString() + "\n" +
+                "Reverse Polish Notation: " +this.reverse_polish.toString() + "\n" +
+                "Final result: " + String.format("Error"));
+        } else {
+                return ("Original expression: " + this.expression + "\n" +
                 "Tokenized expression: " + this.tokens.toString() + "\n" +
                 "Reverse Polish Notation: " +this.reverse_polish.toString() + "\n" +
                 "Final result: " + String.format("%.2f", this.result));
+        }
+        
     }
 
     // Tester method
@@ -272,5 +295,8 @@ public class Calculator {
         Calculator divisionMath = new Calculator("300/200");
         System.out.println("Division Math\n" + divisionMath);
 
+        System.out.println(); 
+        Calculator extraMath = new Calculator("(100 + 200) * 3)");
+        System.out.println("Extra Math\n" + extraMath);
     }
 }
