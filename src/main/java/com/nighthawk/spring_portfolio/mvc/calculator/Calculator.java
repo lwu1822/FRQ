@@ -314,5 +314,9 @@ public class Calculator {
         System.out.println(); 
         Calculator extraMath = new Calculator("2^0");
         System.out.println("Extra Math\n" + extraMath);
+
+        System.out.println(); 
+        Calculator wrongMath = new Calculator("(2+3))");
+        System.out.println("Wrong Math\n" + wrongMath);
     }
 }
