@@ -298,10 +298,18 @@ public class Calculator {
     // Print the expression, terms, and result
     public String toString() {
         if (this.error) {
+            /* 
+            return ("Original expression: " + this.expression + "\n" +
+                "Tokenized expression: " + this.tokens.toString() + "\n" +
+                "Reverse Polish Notation: " +this.reverse_polish.toString() + "\n" +
+                "Final result: " + (new RuntimeException("Error")));
+            */ 
+            
             return ("Original expression: " + this.expression + "\n" +
                 "Tokenized expression: " + this.tokens.toString() + "\n" +
                 "Reverse Polish Notation: " +this.reverse_polish.toString() + "\n" +
                 "Final result: " + String.format("Error"));
+                
         } else {
                 return ("Original expression: " + this.expression + "\n" +
                 "Tokenized expression: " + this.tokens.toString() + "\n" +
