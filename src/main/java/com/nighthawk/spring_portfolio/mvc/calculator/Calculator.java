@@ -20,6 +20,7 @@ public class Calculator {
     private ArrayList<String> reverse_polish;
     private Double result = 0.0;
     private boolean error = false; 
+    private boolean sqrtYes = false; 
 
     // Helper definition for supported operators
     private final Map<String, Integer> OPERATORS = new HashMap<>();
@@ -31,6 +32,7 @@ public class Calculator {
         OPERATORS.put("+", 4);
         OPERATORS.put("-", 4);
         OPERATORS.put("^", 2);
+        OPERATORS.put("s", 2); 
     }
 
     // Helper definition for supported operators
@@ -86,6 +88,8 @@ public class Calculator {
             Character c = this.expression.charAt(i);
             if ( isOperator(c.toString() ) || isSeparator(c.toString())  ) {
                 // 1st check for working term and add if it exists
+                // IMPORTANT: (no occur in this program), but if start + i same in substring(start, i)
+                // will output null
                 if (multiCharTerm.length() > 0) {
                     tokens.add(this.expression.substring(start, i));
                 }
@@ -95,6 +99,8 @@ public class Calculator {
                 }
                 // Get ready for next term
                 start = i + 1;
+                // IMPORTANT: if do new StringBuilder, reset multiCharTerm (this way no put 
+                // _ (space) in tokens)
                 multiCharTerm = new StringBuilder();
             } else {
                 // multi character terms: numbers, functions, perhaps non-supported elements
@@ -182,7 +188,8 @@ public class Calculator {
     {
         // stack is used to hold operands and each calculation
         Stack<Double> calcStack = new Stack<Double>();
-
+        calcStack.push(0.0) ;
+        calcStack.push(0.0); 
         // RPN is processed, ultimately calcStack has final result
         for (String token : this.reverse_polish)
         {
@@ -226,6 +233,10 @@ public class Calculator {
                     result = Math.pow(num, num2); 
                 }
 
+                if (token.equals("s")) {
+                    sqrtYes = true;  
+                }
+
 
 
                 // IMPORTANT: unsure why c't use switch case
@@ -253,6 +264,11 @@ public class Calculator {
             // else the token is a number push it onto the stack
             else
             {
+                if (sqrtYes = true) {
+                    calcStack.push(Double.valueOf(token)); 
+                    result = Math.sqrt(calcStack.pop()); 
+                    calcStack.push(result); 
+                }
                 calcStack.push(Double.valueOf(token));
             }
         }
@@ -318,5 +334,9 @@ public class Calculator {
         System.out.println(); 
         Calculator wrongMath = new Calculator("(2+3))");
         System.out.println("Wrong Math\n" + wrongMath);
+
+        System.out.println(); 
+        Calculator sqrtMath = new Calculator("s(4)");
+        System.out.println("Sqrt Math\n" + sqrtMath);
     }
 }
