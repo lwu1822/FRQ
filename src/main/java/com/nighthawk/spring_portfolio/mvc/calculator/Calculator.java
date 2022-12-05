@@ -142,9 +142,16 @@ public class Calculator {
                 */
                     if (tokenStack.empty() == false) {
                         tokenStack.pop();
+                        if (sqrtYes == true) {
+                            reverse_polish.add("s");
+                            sqrtYes = false; 
+                        }
                     } else {
                         tokenStack.push(token); 
                     }
+                    break;
+                case "s": 
+                    sqrtYes = true; 
                     break;
                 // IMPORTANT: Many case together = run same code
                 case "+":
@@ -234,7 +241,8 @@ public class Calculator {
                 }
 
                 if (token.equals("s")) {
-                    sqrtYes = true;  
+                    //sqrtYes = true;  
+                    result = Math.sqrt(num2); 
                 }
 
 
@@ -264,6 +272,8 @@ public class Calculator {
             // else the token is a number push it onto the stack
             else
             {
+                calcStack.push(Double.valueOf(token));
+                /* 
                 if (sqrtYes == true) {
                     calcStack.push(Double.valueOf(token)); 
                     result = Math.sqrt(Double.valueOf(calcStack.pop())); 
@@ -272,6 +282,7 @@ public class Calculator {
                 } else {
                     calcStack.push(Double.valueOf(token));
                 }
+                */
             }
         }
         // Pop final result and set as final result for expression
@@ -338,7 +349,7 @@ public class Calculator {
         System.out.println("Wrong Math\n" + wrongMath);
 
         System.out.println(); 
-        Calculator sqrtMath = new Calculator("s(4)");
+        Calculator sqrtMath = new Calculator("s(4 + 5) + 3");
         System.out.println("Sqrt Math\n" + sqrtMath);
     }
 }
