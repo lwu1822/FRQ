@@ -32,7 +32,8 @@ public class Calculator {
         OPERATORS.put("+", 4);
         OPERATORS.put("-", 4);
         OPERATORS.put("^", 2);
-        OPERATORS.put("s", 2); 
+        OPERATORS.put("s", 2);
+        OPERATORS.put("sqrt", 2);
     }
 
     // Helper definition for supported operators
@@ -95,7 +96,12 @@ public class Calculator {
                 }
                 // Add operator or parenthesis term to list
                 if (c != ' ') {
-                    tokens.add(c.toString());
+                    if (c == 's') {
+                        tokens.add("sqrt");
+                        i += 3;
+                    } else {
+                        tokens.add(c.toString());
+                    }
                 }
                 // Get ready for next term
                 start = i + 1;
@@ -143,14 +149,14 @@ public class Calculator {
                     if (tokenStack.empty() == false) {
                         tokenStack.pop();
                         if (sqrtYes == true) {
-                            reverse_polish.add("s");
+                            reverse_polish.add("sqrt");
                             sqrtYes = false; 
                         }
                     } else {
                         tokenStack.push(token); 
                     }
                     break;
-                case "s": 
+                case "sqrt": 
                     sqrtYes = true; 
                     break;
                 // IMPORTANT: Many case together = run same code
@@ -240,7 +246,7 @@ public class Calculator {
                     result = Math.pow(num, num2); 
                 }
 
-                if (token.equals("s")) {
+                if (token.equals("sqrt")) {
                     //sqrtYes = true;  
                     result = Math.sqrt(num2); 
                 }
@@ -349,7 +355,7 @@ public class Calculator {
         System.out.println("Wrong Math\n" + wrongMath);
 
         System.out.println(); 
-        Calculator sqrtMath = new Calculator("s(4 + 5) + 3");
+        Calculator sqrtMath = new Calculator("sqrt(4 + 5)");
         System.out.println("Sqrt Math\n" + sqrtMath);
     }
 }
