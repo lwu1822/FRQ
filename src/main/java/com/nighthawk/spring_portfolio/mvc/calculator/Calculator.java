@@ -264,12 +264,14 @@ public class Calculator {
             // else the token is a number push it onto the stack
             else
             {
-                if (sqrtYes = true) {
+                if (sqrtYes == true) {
                     calcStack.push(Double.valueOf(token)); 
-                    result = Math.sqrt(calcStack.pop()); 
+                    result = Math.sqrt(Double.valueOf(calcStack.pop())); 
                     calcStack.push(result); 
+                    sqrtYes = false;
+                } else {
+                    calcStack.push(Double.valueOf(token));
                 }
-                calcStack.push(Double.valueOf(token));
             }
         }
         // Pop final result and set as final result for expression
