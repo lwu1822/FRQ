@@ -48,6 +48,8 @@ public class LightBoard {
                 "\033[m" +
                 
                 // color
+                // IMPORTANT: [38;2 = set foreground RGB color, see
+                // https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
                 "\033[38;2;" + 
                 lights[row][col].getRed() + ";" +  // set color using getters
                 lights[row][col].getGreen() + ";" +
@@ -76,7 +78,7 @@ public class LightBoard {
 
         // Build large string for entire color palette
         String outString = "";
-        // find each row
+        // find each row 
         for (int row = 0; row < lights.length; row++) {
             // repeat each row for block size
             for (int i = 0; i < ROWS; i++) {
@@ -85,9 +87,12 @@ public class LightBoard {
                     // repeat each column for block size
                     for (int j = 0; j < COLS; j++) {
                         // print single character, except at midpoint print color code
+                        // IMPORTANT: see how r:
+                        // http://twistedoakstudios.com/blog/Post5273_how-to-read-nested-ternary-operators
                         String c = (i == (int) (ROWS / 2) && j == (int) (COLS / 2) ) 
                             ? lights[row][col].getRGB()
                             : (j == (int) (COLS / 2))  // nested ternary
+                            // IMPORTANT: .repeat(#): Repeat str (ex: " ") # t
                             ? " ".repeat(lights[row][col].getRGB().length())
                             : " ";
 

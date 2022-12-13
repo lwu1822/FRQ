@@ -5,7 +5,6 @@ import java.util.Map;
 
 import lombok.Data;
 @Data  // Annotations to simplify writing code (ie constructors, setters)
-
 public class Light {
     boolean on;
     short red;
@@ -57,6 +56,8 @@ public class Light {
 
     public String getRGB() {
         return ( "#" +
+        // IMPORTANT: %02X = convert decimal to hex, see:
+        // https://mkyong.com/java/java-how-to-convert-bytes-to-hex/
          String.format("%02X", this.red) +
          String.format("%02X", this.green) + 
          String.format("%02X", this.blue) 
