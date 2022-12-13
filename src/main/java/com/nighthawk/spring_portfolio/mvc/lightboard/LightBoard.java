@@ -91,29 +91,49 @@ public class LightBoard {
                         // print single character, except at midpoint print color code
                         // IMPORTANT: see how r:
                         // http://twistedoakstudios.com/blog/Post5273_how-to-read-nested-ternary-operators
-                        String c = (i == (int) (ROWS / 2) && j == (int) (COLS / 2) ) 
+                        String c = (i == (int) (ROWS / 2) && j == (int) (COLS / 2) && lights[row][col].getOn() == false)
+                            ? " ".repeat(lights[row][col].getRGB().length())
+                            : (i == (int) (ROWS / 2) && j == (int) (COLS / 2) ) 
                             ? lights[row][col].getRGB()
                             : (j == (int) (COLS / 2))  // nested ternary
                             // IMPORTANT: .repeat(#): Repeat str (ex: " ") # t
                             ? " ".repeat(lights[row][col].getRGB().length())
                             : " ";
 
-                        outString += 
-                        // reset
-                        "\033[m" +
+                        if (lights[row][col].getOn() == true) {
+                            outString += 
+                            // reset
+                            "\033[m" +
+                            
+                            // color
+                            "\033[38;2;" + 
+                            lights[row][col].getRed() + ";" +
+                            lights[row][col].getGreen() + ";" +
+                            lights[row][col].getBlue() + ";" +
+                            "7m" +
+
+                            // color code or blank character
+                            c +
+
+                            // reset
+                            "\033[m";
+                        } else {
+                            outString +=  
+                            "\033[m" +
+                            // color
+                            "\033[38;2;" + 
+                            0 + ";" +
+                            0 + ";" +
+                            0 + ";" +
+                            "7m" +
+
+                            // color code or blank character
+                            c +
+
+                            // reset
+                            "\033[m";
+                        }
                         
-                        // color
-                        "\033[38;2;" + 
-                        lights[row][col].getRed() + ";" +
-                        lights[row][col].getGreen() + ";" +
-                        lights[row][col].getBlue() + ";" +
-                        "7m" +
-
-                        // color code or blank character
-                        c +
-
-                        // reset
-                        "\033[m";
                     }
                 }
                 outString += "\n";
