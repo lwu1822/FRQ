@@ -69,6 +69,25 @@ public class Light {
         */
     }
 
+    public Light(short red, short green, short blue, boolean on) {
+        int maxColor = 255;
+        int effect = 9;
+        this.red = red; 
+        this.green = green; 
+        this.blue = blue; 
+        this.on = on; 
+
+        this.effect = (short) (Math.random()*(effect+1));
+        /* 
+        this.red = (short) (Math.random()*(maxColor+1));
+        this.green = (short) (Math.random()*(maxColor+1));
+        this.blue = (short) (Math.random()*(maxColor+1));
+        this.effect = (short) (Math.random()*(effect+1));
+        this.on = random.nextBoolean(); 
+        */
+    }
+
+
     public String getEffectTitle() {
         return EFFECT.get(this.effect);
     }
