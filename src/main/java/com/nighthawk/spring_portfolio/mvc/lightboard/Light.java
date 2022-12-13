@@ -3,6 +3,8 @@ package com.nighthawk.spring_portfolio.mvc.lightboard;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.util.Random; 
+
 import lombok.Data;
 @Data  // Annotations to simplify writing code (ie constructors, setters)
 public class Light {
@@ -11,6 +13,8 @@ public class Light {
     short green;
     short blue;
     short effect;
+
+    Random random = new Random(); 
 
     /*  ANSI effects
         n	Name	Note
@@ -48,6 +52,7 @@ public class Light {
         this.green = (short) (Math.random()*(maxColor+1));
         this.blue = (short) (Math.random()*(maxColor+1));
         this.effect = (short) (Math.random()*(effect+1));
+        this.on = random.nextBoolean(); 
     }
 
     public String getEffectTitle() {
@@ -70,8 +75,13 @@ public class Light {
             "\"red\": " + red + "," +
             "\"green\": " +  green + "," + 
             "\"blue\": " + blue + "," +
-            "\"effect\": " + "\"" + EFFECT.get(effect) + "\"" +
+            "\"effect\": " + "\"" + EFFECT.get(effect) + "\"" + "," +
+            "\"on\": " + on  +
             "}" );
+    }
+
+    public boolean getOn() {
+        return this.on; 
     }
 
     static public void main(String[] args) {

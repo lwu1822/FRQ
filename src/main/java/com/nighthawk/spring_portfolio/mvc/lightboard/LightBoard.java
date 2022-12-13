@@ -60,6 +60,8 @@ public class LightBoard {
                 "\"" + "RGB\": " + "\"" + lights[row][col].getRGB() + "\"" +
                 "," +
                 "\"" + "Effect\": " + "\"" + lights[row][col].getEffectTitle() + "\"" +
+                "," +
+                "\"" + "On\": " + "\"" + lights[row][col].getOn() + "\"" +
                 "}," +
                 // newline
                 "\n" ;
