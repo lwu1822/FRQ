@@ -50,6 +50,7 @@ public class Light {
     public Light() {
         int maxColor = 255;
         int effect = 9;
+        /* 
         System.out.println("Red: ");
         this.red = sc.nextShort(); 
         System.out.println("Green: ");
@@ -58,15 +59,15 @@ public class Light {
         this.blue = sc.nextShort(); 
         System.out.println("On/off: ");
         this.on = sc.nextBoolean(); 
-
+        */
         this.effect = (short) (Math.random()*(effect+1));
-        /* 
+        
         this.red = (short) (Math.random()*(maxColor+1));
         this.green = (short) (Math.random()*(maxColor+1));
         this.blue = (short) (Math.random()*(maxColor+1));
         this.effect = (short) (Math.random()*(effect+1));
         this.on = random.nextBoolean(); 
-        */
+        
     }
 
     public Light(short red, short green, short blue, boolean on) {

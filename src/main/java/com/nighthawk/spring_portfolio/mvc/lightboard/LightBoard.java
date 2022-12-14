@@ -101,22 +101,44 @@ public class LightBoard {
                             : " ";
 
                         if (lights[row][col].getOn() == true) {
-                            outString += 
-                            // reset
-                            "\033[m" +
+                            if (lights[row][col].getRed() + lights[row][col].getGreen() + lights[row][col].getBlue() >= 383) {
+                                outString += 
+                                // reset
+                                "\033[m" +
+                                
+                                // color
+                                "\033[38;2;" + 
+                                lights[row][col].getRed() + ";" +
+                                lights[row][col].getGreen() + ";" +
+                                lights[row][col].getBlue() + ";" +
+                                "7m" +
+
+                                // color code or blank character
+                                "\033[48;2;0;0;0;7m" +
+                                c +
+
+                                // reset
+                                "\033[m";
+                                } else {
+                                    outString += 
+                                    // reset
+                                    "\033[m" +
+                                    
+                                    // color
+                                    "\033[38;2;" + 
+                                    lights[row][col].getRed() + ";" +
+                                    lights[row][col].getGreen() + ";" +
+                                    lights[row][col].getBlue() + ";" +
+                                    "7m" +
+
+                                    // color code or blank character
+                                    "\033[48;2;255;255;255;7m" +
+                                    c +
+
+                                    // reset
+                                    "\033[m";
+                                        }
                             
-                            // color
-                            "\033[38;2;" + 
-                            lights[row][col].getRed() + ";" +
-                            lights[row][col].getGreen() + ";" +
-                            lights[row][col].getBlue() + ";" +
-                            "7m" +
-
-                            // color code or blank character
-                            c +
-
-                            // reset
-                            "\033[m";
                         } else {
                             outString +=  
                             "\033[m" +
