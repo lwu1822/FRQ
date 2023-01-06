@@ -94,13 +94,32 @@ public class LightBoard {
                         String c = (i == (int) (ROWS / 2) && j == (int) (COLS / 2) && lights[row][col].getOn() == false)
                             ? " ".repeat(lights[row][col].getRGB().length())
                             : (i == (int) (ROWS / 2) && j == (int) (COLS / 2) ) 
-                            ? lights[row][col].getRGB()
+                            ? "\033[48;2;255;0;0m" + lights[row][col].getRGB()
                             : (j == (int) (COLS / 2))  // nested ternary
                             // IMPORTANT: .repeat(#): Repeat str (ex: " ") # t
                             ? " ".repeat(lights[row][col].getRGB().length())
                             : " ";
 
                         if (lights[row][col].getOn() == true) {
+                                    outString += 
+                                    // reset
+                                    "\033[m" +
+                                    
+                                    // color
+                                    "\033[38;2;" + 
+                                    lights[row][col].getRed() + ";" +
+                                    lights[row][col].getGreen() + ";" +
+                                    lights[row][col].getBlue() + ";" +
+                                    "7m" +
+
+                                    // color code or blank character
+                                    //"\033[48;2;255;255;255;7m" +
+                                    c +
+
+                                    // reset
+                                    "\033[m";
+                                        
+                            /* 
                             if (lights[row][col].getRed() + lights[row][col].getGreen() + lights[row][col].getBlue() >= 383) {
                                 outString += 
                                 // reset
@@ -138,7 +157,7 @@ public class LightBoard {
                                     // reset
                                     "\033[m";
                                         }
-                            
+                           */ 
                         } else {
                             outString +=  
                             "\033[m" +
