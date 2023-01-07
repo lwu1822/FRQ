@@ -1,7 +1,7 @@
 version: '3'
 services:
   web:
-    image: java_springv1
+    image: java_springv1_t1_tri2
     build: .
     ports:
       - "8001:8085"
