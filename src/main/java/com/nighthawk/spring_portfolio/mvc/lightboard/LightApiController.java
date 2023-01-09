@@ -43,6 +43,20 @@ public class LightApiController {
       
     }
 
+    private LightBoard lightBoard;
+    private JsonNode json;
+
+    @GetMapping("/generate/{rows}/{cols}")
+    public ResponseEntity<JsonNode> generateLightBoard(@PathVariable int rows, @PathVariable int cols) throws JsonMappingException, JsonProcessingException {
+        lightBoard = new LightBoard(rows, cols);
+
+        // Create objectmapper to convert String to JSON
+        ObjectMapper mapper = new ObjectMapper(); 
+        json = mapper.readTree(lightBoard.toString()); 
+
+        return ResponseEntity.ok(json);
+    }
+
     // add other methods
 }
 
