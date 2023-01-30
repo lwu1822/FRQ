@@ -23,8 +23,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 /*
 * To enable HTTP Security in Spring, extend the WebSecurityConfigurerAdapter. 
 */
+
+// IMPORTANT: have spring see this as configuration class
 @Configuration
 @EnableWebSecurity  // Beans to enable basic Web security
+// IMPORTANT: these two above must have
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -64,7 +67,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		        // We don't need CSRF for this example
                 .csrf().disable()
 				// don't authenticate this particular request
-				.authorizeRequests().antMatchers("/authenticate").permitAll()
+				// IMPORTANT: whitelist website (no need token)
+				.authorizeRequests().antMatchers("/login/**").permitAll()
 				// all other requests need to be authenticated
 				.anyRequest().authenticated().and().
 				// make sure we use stateless session; session won't be used to

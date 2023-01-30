@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Map.Entry;
 
 @RestController
-@RequestMapping("/api/person")
+@RequestMapping("/login")
 public class PersonApiController {
     /*
     #### RESTful API ####

@@ -29,7 +29,7 @@ public class JwtApiController {
 	@Autowired
 	private JwtUserDetailsService jwtUserDetailsService;
 
-	@PostMapping("/authenticate")
+	@PostMapping("/login/authenticate")
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody Person authenticationRequest) throws Exception {
 		authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword());
 		final UserDetails userDetails = jwtUserDetailsService
