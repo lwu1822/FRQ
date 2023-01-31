@@ -13,6 +13,7 @@ import java.util.Map.Entry;
 
 @RestController
 @RequestMapping("/login")
+@CrossOrigin(origins = "*")
 public class PersonApiController {
     /*
     #### RESTful API ####
