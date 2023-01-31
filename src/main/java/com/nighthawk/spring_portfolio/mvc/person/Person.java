@@ -74,6 +74,8 @@ public class Person {
 
     // IMPORTANT: double n captilize for some reason
     private Double height; 
+
+    private String role; 
     
 
     /* HashMap is used to store JSON for daily "stats"
@@ -90,12 +92,13 @@ public class Person {
     
 
     // Constructor used when building object from an API
-    public Person(String email, String password, String name, Date dob, Double height) {
+    public Person(String email, String password, String name, Date dob, Double height, String role) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.dob = dob;
         this.height = height; 
+        this.role = role; 
     }
 
     // A custom getter to return age from dob attribute
@@ -162,7 +165,7 @@ public class Person {
         }
 
         Person personNoArg = new Person(); 
-        Person person = new Person("tedison@gmail.com", "123qwerty!", "Thomas Edison", dob, (Double)70.0); 
+        Person person = new Person("tedison@gmail.com", "123qwerty!", "Thomas Edison", dob, (Double)70.0, "admin"); 
 
         System.out.println("No arg constructor: " + personNoArg); 
 
