@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nighthawk.spring_portfolio.mvc.person.Person;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "https://lwu1822.github.io/crimebustersrevival/login")
 public class JwtApiController {
 
 	@Autowired
