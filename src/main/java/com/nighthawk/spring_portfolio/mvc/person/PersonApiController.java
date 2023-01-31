@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Map.Entry;
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping(value = "/login")
 @CrossOrigin(origins = "*")
 public class PersonApiController {
     /*
