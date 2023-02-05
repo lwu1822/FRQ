@@ -70,7 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // httpSecurity.csrf().disable();
 		httpSecurity
 		        // We don't need CSRF for this example
-                .cors().and().csrf().disable()
+                .csrf().disable()
 				// don't authenticate this particular request
 				// IMPORTANT: whitelist website (no need token)
 				.authorizeRequests()
@@ -88,6 +88,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 
+	/* 
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
 		final CorsConfiguration config = new CorsConfiguration();
@@ -102,4 +103,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		return source;
 	}
+	*/
 }
