@@ -75,7 +75,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// IMPORTANT: whitelist website (no need token)
 				.authorizeRequests()
 				.antMatchers("/login/**").permitAll() 
-				.antMatchers("/").hasRole("ADMIN")
+				//.antMatchers("/").hasRole("ADMIN")
 				//.antMatchers("/").hasRole("ADMIN")
 				// all other requests need to be authenticated
 				.anyRequest().authenticated().and().
