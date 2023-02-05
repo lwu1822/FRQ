@@ -70,7 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // httpSecurity.csrf().disable();
 		httpSecurity
 		        // We don't need CSRF for this example
-                .csrf().disable()
+                .cors().and().csrf().disable()
 				// don't authenticate this particular request
 				// IMPORTANT: whitelist website (no need token)
 				.authorizeRequests()
