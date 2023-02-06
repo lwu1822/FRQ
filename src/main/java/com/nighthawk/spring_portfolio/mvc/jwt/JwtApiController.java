@@ -19,7 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.HttpStatus;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4002")
+@CrossOrigin
 public class JwtApiController {
 
 	@Autowired
