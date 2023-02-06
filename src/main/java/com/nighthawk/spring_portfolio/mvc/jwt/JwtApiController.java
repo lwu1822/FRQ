@@ -44,12 +44,12 @@ public class JwtApiController {
 			.maxAge(3600)
 			// .domain("example.com") // Set to backend domain
 			.build();
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.set(HttpHeaders.SET_COOKIE, tokenCookie.toString());
-		return new ResponseEntity<>(null, headers, HttpStatus.OK);
+		// HttpHeaders headers = new HttpHeaders();
+		// headers.setContentType(MediaType.APPLICATION_JSON);
+		// headers.set(HttpHeaders.SET_COOKIE, tokenCookie.toString());
+		// return new ResponseEntity<>(null, headers, HttpStatus.OK);
 
-		//return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, tokenCookie.toString()).build();
+		return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, tokenCookie.toString()).build();
 	}
 
 	private void authenticate(String username, String password) throws Exception {
