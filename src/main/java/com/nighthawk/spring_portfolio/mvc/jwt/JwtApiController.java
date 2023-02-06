@@ -19,7 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.HttpStatus;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4002")
 public class JwtApiController {
 
 	@Autowired
@@ -45,6 +45,8 @@ public class JwtApiController {
 			// .domain("example.com") // Set to backend domain
 			.build();
 		HttpHeaders headers = new HttpHeaders();
+		headers.add("Access-Control-Allow-Origin", "http://localhost:4002");
+    	headers.add("Access-Control-Allow-Credentials", "true");
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.set(HttpHeaders.SET_COOKIE, tokenCookie.toString());
 		return new ResponseEntity<>(null, headers, HttpStatus.OK);
