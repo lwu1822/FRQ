@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nighthawk.spring_portfolio.mvc.person.Person;
+import org.springframework.http.MediaType;
+import org.springframework.http.HttpStatus;
 
 @RestController
 @CrossOrigin(origins = "https://lwu1822.github.io/crimebustersrevival/login")
@@ -29,7 +31,7 @@ public class JwtApiController {
 	@Autowired
 	private JwtUserDetailsService jwtUserDetailsService;
 
-	@PostMapping("/login/authenticate")
+	@PostMapping(value="/login/authenticate", consumes="application/json")
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody Person authenticationRequest) throws Exception {
 		authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword());
 		final UserDetails userDetails = jwtUserDetailsService
@@ -42,6 +44,11 @@ public class JwtApiController {
 			.maxAge(3600)
 			// .domain("example.com") // Set to backend domain
 			.build();
+		// HttpHeaders headers = new HttpHeaders();
+		// headers.setContentType(MediaType.APPLICATION_JSON);
+		// headers.set(HttpHeaders.SET_COOKIE, tokenCookie.toString());
+		// return new ResponseEntity<>(null, headers, HttpStatus.OK);
+
 		return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, tokenCookie.toString()).build();
 	}
 
