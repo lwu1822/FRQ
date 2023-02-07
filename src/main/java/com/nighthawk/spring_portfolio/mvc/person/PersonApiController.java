@@ -13,7 +13,6 @@ import java.util.Map.Entry;
 
 @RestController
 @RequestMapping(value = "/login")
-@CrossOrigin(origins = "https://lwu1822.github.io/crimebustersrevival/login")
 public class PersonApiController {
     /*
     #### RESTful API ####
