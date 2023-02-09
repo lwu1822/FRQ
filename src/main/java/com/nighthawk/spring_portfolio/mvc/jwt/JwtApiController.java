@@ -42,6 +42,7 @@ public class JwtApiController {
 			.secure(true)
 			.path("/")
 			.maxAge(3600)
+			.sameSite("None; Secure")
 			// .domain("example.com") // Set to backend domain
 			.build();
 		// HttpHeaders headers = new HttpHeaders();
