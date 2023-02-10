@@ -29,11 +29,11 @@ public class Note {
     @JoinColumn(name = "tutorial_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private Club club;
+    private Cipher cipher;
 
-    public Note(String text, Club p) {
+    public Note(String text, Cipher p) {
         this.text = text;
-        this.club = p;
+        this.cipher = p;
 
     }
 
