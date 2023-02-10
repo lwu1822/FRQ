@@ -20,7 +20,7 @@ import org.springframework.http.HttpStatus;
 
 @RestController
 //@CrossOrigin(origins={"https://lwu1822.github.io"})
-@CrossOrigin
+//@CrossOrigin
 public class JwtApiController {
 
 	@Autowired
