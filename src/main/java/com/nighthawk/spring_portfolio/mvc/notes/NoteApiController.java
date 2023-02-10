@@ -10,31 +10,16 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nighthawk.team_backend.mvc.database.club.Club;
+import com.nighthawk.team_backend.mvc.database.cipher.Cipher;
 
 import java.util.*;
 
 @RestController
 @RequestMapping("/api/note")
 public class NoteApiController {
-    // @Autowired
-    // private JwtTokenUtil jwtGen;
-    /*
-     * #### RESTful API ####
-     * Resource: https://spring.io/guides/gs/rest-service/
-     */
-
-    // Autowired enables Control to connect POJO Object through JPA
 
     @Autowired
     private NoteJpaRepository notejparepository;
-
-    /*
-     * GET List of People
-     */
-    /*
-     * GET individual Club using ID
-     */
 
     @GetMapping("/{id}")
     public ResponseEntity<String> getNote(@PathVariable Long id) throws JsonMappingException, JsonProcessingException {
