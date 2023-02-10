@@ -41,7 +41,7 @@ public class JwtApiController {
 		final ResponseCookie tokenCookie = ResponseCookie.from("jwt", token)
 			.httpOnly(true)
 			.secure(true)
-			.path("/login")
+			.path("/login/authenticate")
 			.maxAge(3600)
 			.sameSite("None; Secure")
 			// .domain("example.com") // Set to backend domain
