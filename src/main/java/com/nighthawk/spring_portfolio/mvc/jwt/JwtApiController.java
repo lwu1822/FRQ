@@ -19,7 +19,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.HttpStatus;
 
 @RestController
+<<<<<<< HEAD
 @CrossOrigin(origins = "https://lwu1822.github.io/crimebustersrevival/login")
+=======
+//@CrossOrigin(origins={"https://lwu1822.github.io"})
+@CrossOrigin(origins="http://localhost:4002")
+>>>>>>> 71f84bbb788df497f09e464cd166cbe34df03c5e
 public class JwtApiController {
 
 	@Autowired
@@ -31,7 +36,7 @@ public class JwtApiController {
 	@Autowired
 	private JwtUserDetailsService jwtUserDetailsService;
 
-	@PostMapping(value="/login/authenticate", consumes="application/json")
+	@PostMapping(value="/login/authenticate")
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody Person authenticationRequest) throws Exception {
 		authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword());
 		final UserDetails userDetails = jwtUserDetailsService
@@ -40,7 +45,7 @@ public class JwtApiController {
 		final ResponseCookie tokenCookie = ResponseCookie.from("jwt", token)
 			.httpOnly(true)
 			.secure(true)
-			.path("/")
+			.path("/login/authenticate")
 			.maxAge(3600)
 			.sameSite("None; Secure")
 			// .domain("example.com") // Set to backend domain
