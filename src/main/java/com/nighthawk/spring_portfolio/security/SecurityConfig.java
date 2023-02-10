@@ -79,10 +79,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				.antMatchers("/login/**").permitAll() 
 				//.antMatchers("/").hasRole("ADMIN")
-				//.antMatchers("/").hasRole("ADMIN")
+				.antMatchers("/").hasRole("ADMIN")
 				// all other requests need to be authenticated
-					.antMatchers("/").authenticated().and()
-				//.anyRequest().authenticated().and()
+				//.antMatchers("/").authenticated().and()
+				.anyRequest().authenticated().and()
 				.cors().and() 
 				.headers()
 				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Credentials", "true"))
