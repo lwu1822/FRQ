@@ -93,6 +93,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				//.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "https://lwu1822.github.io"))
 				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "http://localhost:4002"))
 				.addHeaderWriter(new StaticHeadersWriter("Content-Type", "application/json"))
+				.addHeaderWriter(new StaticHeadersWriter("Transfer-Encoding", "chunked"))
 				.and()
 				// make sure we use stateless session; session won't be used to
 				// store user's state.
