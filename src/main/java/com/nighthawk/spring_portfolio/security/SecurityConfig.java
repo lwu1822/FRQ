@@ -89,7 +89,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Headers", "Content-Type", "Authorization", "x-csrf-token"))
 				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-MaxAge", "600"))
 				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Methods", "POST", "GET", "OPTIONS", "HEAD"))
-				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "https://lwu1822.github.io"))
+				//.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "https://lwu1822.github.io"))
+				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "http://localhost:4002"))
 				.addHeaderWriter(new StaticHeadersWriter("Content-Type", "application/json"))
 				.and()
 				// make sure we use stateless session; session won't be used to
