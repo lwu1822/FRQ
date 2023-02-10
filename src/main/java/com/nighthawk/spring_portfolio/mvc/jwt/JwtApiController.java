@@ -19,12 +19,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.HttpStatus;
 
 @RestController
-<<<<<<< HEAD
-@CrossOrigin(origins = "https://lwu1822.github.io/crimebustersrevival/login")
-=======
 //@CrossOrigin(origins={"https://lwu1822.github.io"})
 @CrossOrigin(origins="http://localhost:4002")
->>>>>>> 71f84bbb788df497f09e464cd166cbe34df03c5e
 public class JwtApiController {
 
 	@Autowired
