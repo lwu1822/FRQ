@@ -4,17 +4,17 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import com.nighthawk.team_backend.mvc.database.club.Club;
+import com.nighthawk.team_backend.mvc.database.cipher.Cipher;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface NoteJpaRepository extends JpaRepository<Note, Long> {
-    List<Club> findByClubId(Long id);
+    List<Cipher> findByCipherId(Long id);
 
     @Transactional
-    void deleteByClubId(long id);
+    void deleteByCipherId(long id);
 
-    static List<Note> findAllByClub(Club club) {
+    static List<Note> findAllByCipher(Cipher cipher) {
         return null;
     }
 }
